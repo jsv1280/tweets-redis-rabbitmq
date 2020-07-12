@@ -1,0 +1,46 @@
+version: "3"
+
+services:
+    twitter_stream:
+        build: ./twitter-stream
+        environment: 
+            CONSUMER_KEY: 
+            CONSUMER_SECRET:
+        volumes:
+            - ./twitter-stream:/usr/src/app
+            - /usr/src/app/node_modules
+        depends_on:
+            - redis_twitter
+            - rabbitmq_twitter
+    twitter_api:
+        build: ./twitter-api
+        environment:
+            PORT: "8080"
+            HOST: "0.0.0.0"
+        depends_on:
+            - redis_twitter
+            - rabbitmq_twitter
+        ports:
+            - "49150:8080"
+        volumes:
+            - ./twitter-api:/usr/src/app
+            - /usr/src/app/node_modules
+    twitter_client:
+        build: ./twitter-client
+        volumes:
+            - ./twitter-client:/usr/src/app
+            - /usr/src/app/node_modules
+    twitter_redis:
+        build: ./twitter-redis
+        volumes:
+            - ./twitter-redis:/usr/src/app
+            - /usr/src/app/node_modules
+        depends_on:
+            - redis_twitter
+    rabbitmq_twitter:
+        image: rabbitmq
+    redis_twitter:
+        image: redis
+    
+
+            

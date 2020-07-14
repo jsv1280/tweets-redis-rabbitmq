@@ -25,18 +25,21 @@ services:
         volumes:
             - ./twitter-api:/usr/src/app
             - /usr/src/app/node_modules
+    twitter_graphql:
+        build: ./twitter-graphql
+        environment:
+            PORT: "8081"
+            HOST: "twitter_graphql"
+        ports:
+            - "49151:8081"
+        volumes:
+            - ./twitter-graphql:/usr/src/app
+            #- /usr/src/app/node_modules
     twitter_client:
         build: ./twitter-client
         volumes:
             - ./twitter-client:/usr/src/app
             - /usr/src/app/node_modules
-    twitter_redis:
-        build: ./twitter-redis
-        volumes:
-            - ./twitter-redis:/usr/src/app
-            - /usr/src/app/node_modules
-        depends_on:
-            - redis_twitter
     rabbitmq_twitter:
         image: rabbitmq
     redis_twitter:

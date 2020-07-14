@@ -16,7 +16,7 @@ function makeHttpsRequest(wordSearch, callback){
         path: '/1.1/search/tweets.json?q='+ encodeURIComponent(wordSearch) + '&lang=en',
         method: 'GET',
         headers : {
-            'Authorization' : 'Bearer AAAAAAAAAAAAAAAAAAAAANPtFgEAAAAAwhfHHSX9bvYuABlEBt4xzcHSyKE%3DytaPcsFKkAwQzs657X7RUtUPHhWfhAYifo0mSbHIMIbrTt8CmC'
+            'Authorization' : ''
         }
     };
     

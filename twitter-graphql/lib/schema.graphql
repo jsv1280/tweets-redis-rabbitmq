@@ -1,0 +1,23 @@
+
+type Tweet {
+    data: TweetData
+    matching_rules: [MatchingRule]
+}
+
+type TweetData {
+    id: String,
+    created_at: String,
+    text: String,
+    author_id: String,
+    format: String
+}
+
+type MatchingRule {
+    id:String
+}
+
+
+type Query {
+    "Return all Tweets"
+    getTweets: [Tweet]
+}

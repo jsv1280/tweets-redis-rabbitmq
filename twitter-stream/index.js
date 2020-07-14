@@ -124,10 +124,14 @@ function streamConnect(token) {
 
   stream.on('data', data => {
       try {
+
         const json = JSON.parse(data);
+
         sendTweetQueue(json);
         
-        console.log(json);
+        console.log('JSON',json);
+
+
         if (json.connection_issue) {
           stream.emit('timeout');
         }

@@ -1,33 +1,16 @@
 'use strict';
 
 const express = require('express');
-
+const redisSearchAPI = require('./routes/tweets');
 // const httpsCall = require('./lib/https');
 
-const redis = require('redis')
-
-const clientRedis  = redis.createClient('redis://redis_twitter');
-
-clientRedis.on('connect', function() {
-    console.log('Conectado a Redis Server');
-});
 
 // Express App
 const app = express();
 
 
 // ENDPOINT TO REQUEST TWEETS FROM OFFICIAL API TWIITTER 
-app.get('/redis_search', (req, res) => {
-
-    clientRedis.get("tweets",function(err,reply){
-        if(err) {
-            console.log(err)
-            res.status(500).send(err);
-        }
-        res.json(JSON.parse(reply));
-        //console.log(reply)
-    })
-})
+redisSearchAPI(app)
     
 app.get('/', (req, res) => {
     res.send('Hello World');
